@@ -1,0 +1,8 @@
+*.xcuserdatad
+*.xcuserstate
+xcuserdata
+xcuserdata/*
+*.swp
+.idea
+
+node_modules
