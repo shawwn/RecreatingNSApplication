@@ -25,7 +25,7 @@ int MyApplicationMain(int argc, const char **argv)
 
 	NSString *mainNibName = [infoDictionary objectForKey:@"NSMainNibFile"];
 	NSNib *mainNib = [[NSNib alloc] initWithNibNamed:mainNibName bundle:[NSBundle mainBundle]];
-	[mainNib instantiateNibWithOwner:applicationObject topLevelObjects:nil];
+  [mainNib instantiateWithOwner:applicationObject topLevelObjects:nil];
 
 	if ([applicationObject respondsToSelector:@selector(run)])
 	{
@@ -58,7 +58,7 @@ int MyApplicationMain(int argc, const char **argv)
 	{
 		NSEvent *event =
 			[self
-				nextEventMatchingMask:NSAnyEventMask
+				nextEventMatchingMask:NSEventMaskAny
 				untilDate:[NSDate distantFuture]
 				inMode:NSDefaultRunLoopMode
 				dequeue:YES];
