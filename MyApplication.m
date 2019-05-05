@@ -16,27 +16,24 @@
 
 int MyApplicationMain(int argc, const char **argv)
 {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	
-	NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-	Class principalClass =
-		NSClassFromString([infoDictionary objectForKey:@"NSPrincipalClass"]);
-	NSApplication *applicationObject = [principalClass sharedApplication];
+	@autoreleasepool {
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    Class principalClass =
+      NSClassFromString([infoDictionary objectForKey:@"NSPrincipalClass"]);
+    NSApplication *applicationObject = [principalClass sharedApplication];
 
-	NSString *mainNibName = [infoDictionary objectForKey:@"NSMainNibFile"];
-	NSNib *mainNib = [[NSNib alloc] initWithNibNamed:mainNibName bundle:[NSBundle mainBundle]];
-  [mainNib instantiateWithOwner:applicationObject topLevelObjects:nil];
+    NSString *mainNibName = [infoDictionary objectForKey:@"NSMainNibFile"];
+    NSNib *mainNib = [[NSNib alloc] initWithNibNamed:mainNibName bundle:[NSBundle mainBundle]];
+    [mainNib instantiateWithOwner:applicationObject topLevelObjects:nil];
 
-	if ([applicationObject respondsToSelector:@selector(run)])
-	{
-		[applicationObject
-			performSelectorOnMainThread:@selector(run)
-			withObject:nil
-			waitUntilDone:YES];
-	}
-	
-	[mainNib release];
-	[pool release];
+    if ([applicationObject respondsToSelector:@selector(run)])
+    {
+      [applicationObject
+        performSelectorOnMainThread:@selector(run)
+        withObject:nil
+        waitUntilDone:YES];
+    }
+  }
 	
 	return 0;
 }
